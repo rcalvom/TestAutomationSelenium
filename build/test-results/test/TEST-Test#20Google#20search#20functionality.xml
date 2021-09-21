@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test Google search functionality" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-21T04:20:45" hostname="Ricardo" time="4.969">
+  <properties/>
+  <testcase name="As a user I enter a search criteria in Google" classname="Test Google search functionality" time="4.969"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[1632198045853	geckodriver	INFO	Listening on 127.0.0.1:13796
+1632198046059	mozrunner::runner	INFO	Running command: "/usr/lib/firefox/firefox" "--marionette" "-no-remote" "-profile" "/tmp/rust_mozprofilesNKgH5"
+1632198047075	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilesNKgH5/search.json.mozlz4", (void 0)))
+1632198048602	Marionette	INFO	Listening on port 39613
+1632198048692	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+sept. 20, 2021 11:20:48 P. M. org.openqa.selenium.remote.ProtocolHandshake createSession
+INFORMACIÓN: Detected dialect: W3C
+]]></system-err>
+</testsuite>

@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'com.SeleniumTest'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '6.11.0'
+    //implementation group: 'org.apache.commons', name: 'commons-configuration2', version: '2.7'
+    testImplementation 'io.cucumber:cucumber-junit:6.11.0'
+
+}

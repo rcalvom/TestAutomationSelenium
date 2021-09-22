@@ -11,6 +11,8 @@ import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+
 /**
  * Abstract Class to define a Page.
  */
@@ -32,27 +34,52 @@ public abstract class BasePage {
      * @param timeOutInSeconds Time out in seconds.
      */
     public BasePage(Browsers browser, long timeOutInSeconds) {
+        String projectPath = System.getProperty("user.dir") + "/src/test/resources/drivers";
+        String osFolder = System.getProperty("os.name");
+        String driverPathPrefix = projectPath + "/" + osFolder;
         switch (browser){
             case CHROME:
-                System.setProperty("webdriver.chrome.driver", "/home/ricardo/.webdrivers/chromedriver");
+                System.out.println(driverPathPrefix + "/chromedriver");
+                if(!(new File(driverPathPrefix + "/chromedriver")).exists()){
+                    throw new UnsupportedOperationException("Chrome driver for \"" + osFolder + "\" is not available.");
+                }
+                System.setProperty("webdriver.chrome.driver", driverPathPrefix + "/chromedriver");
                 this.driver = new ChromeDriver(new ChromeOptions());
                 break;
             case FIREFOX:
-                System.setProperty("webdriver.gecko.driver", "/home/ricardo/.webdrivers/geckodriver");
+                if(!(new File(driverPathPrefix + "/geckodriver")).exists()){
+                    throw new UnsupportedOperationException("Firefox driver for \"" + osFolder + "\" is not available.");
+                }
+                System.setProperty("webdriver.gecko.driver", driverPathPrefix + "/geckodriver");
                 this.driver = new FirefoxDriver();
                 break;
             case EDGE:
-                this.driver = new EdgeDriver(); //TODO: Driver de Edge.
+                if(!(new File(driverPathPrefix + "/msedgedriver")).exists()){
+                    throw new UnsupportedOperationException("Edge driver for \"" + osFolder + "\" is not available.");
+                }
+                System.setProperty("webdriver.gecko.driver", driverPathPrefix + "/msedgedriver");
+                this.driver = new EdgeDriver();
                 break;
             case INTERNET_EXPLORER:
-                this.driver = new InternetExplorerDriver(); //TODO: Driver de Internet explorer.
+                if(!(new File(driverPathPrefix + "/IEDriverServer")).exists()){
+                    throw new UnsupportedOperationException("Internet explorer driver for \"" + osFolder + "\" is not available.");
+                }
+                System.setProperty("webdriver.ie.driver", driverPathPrefix + "/IEDriverServer");
+                this.driver = new InternetExplorerDriver();
                 break;
             case OPERA:
-                System.setProperty("webdriver.opera.driver", "/home/ricardo/.webdrivers/operadriver");
+                if(!(new File(driverPathPrefix + "/operadriver")).exists()){
+                    throw new UnsupportedOperationException("Opera driver for \"" + osFolder + "\" is not available.");
+                }
+                System.setProperty("webdriver.opera.driver", driverPathPrefix + "/operadriver");
                 this.driver = new OperaDriver(new OperaOptions());
                 break;
             case SAFARI:
-                this.driver = new SafariDriver(); //TODO: Driver de Safari.
+                if(!(new File(driverPathPrefix + "/safaridriver")).exists()){
+                    throw new UnsupportedOperationException("Safari driver for \"" + osFolder + "\" is not available.");
+                }
+                System.setProperty("webdriver.safari.driver", driverPathPrefix + "/safaridriver");
+                this.driver = new SafariDriver();
                 break;
             default:
                 throw new UnsupportedOperationException("The specific browser is not supported by Selenium.");
